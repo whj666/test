@@ -9,7 +9,6 @@ export function LoadingHoc(Component) {
 
         toggleLoading = () => {
             const isMounted = this.updater.isMounted(this);
-            console.log(this.updater);
             if (isMounted) {
                 this.setState(prevState => ({
                     loading: !prevState.loading
