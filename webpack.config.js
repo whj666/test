@@ -79,7 +79,7 @@ module.exports = {
 
         //在输出文件夹中添加html页面
         new HtmlWebpackPlugin({
-            template: __dirname + '/src/index.html', //将指定的html页面内容覆盖到输出文件夹中的html里,并且会自动引入出口bundle.js以及分离出来的css文件
+            template: __dirname + '/template/index.html', //将指定的html页面内容覆盖到输出文件夹中的html里,并且会自动引入出口bundle.js以及分离出来的css文件
             favicon: __dirname + '/ico/favicon.ico' //添加网站的图标
         })
     ]
