@@ -1,6 +1,25 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin'); //在输入文件夹里添加html页面
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); //从js文件中分离样式文件的插件
+const os = require('os');
+const ifaces = os.networkInterfaces();
+
+function getLocalIp() {
+    let host = '127.0.0.1';
+
+    for (const dev in ifaces) {
+        ifaces[dev].forEach(function(details) {
+            if (
+                details.family === 'IPv4' &&
+                details.address.indexOf('192.168') >= 0
+            ) {
+                host = details.address;
+            }
+        });
+    }
+
+    return host;
+}
 
 module.exports = {
     entry: path.resolve(__dirname, 'src/index.js'),
@@ -67,8 +86,9 @@ module.exports = {
     devServer: {
         contentBase: path.join(__dirname, 'lib'), //可以在url上输入lib文件夹下面的文件的名称来访问该静态文件
         overlay: true, //如果报错，则把错误信息显示到浏览器上
-        open: true, //服务器启动后打开默认浏览器 localhost:8080
-        port: 8090, //监听8090端口
+        open: true, //服务器启动后打开默认浏览器
+        host: getLocalIp(),
+        port: 8090,
         publicPath: '/test/'
     },
 
