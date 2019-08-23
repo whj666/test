@@ -1,11 +1,13 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin'); //在输入文件夹里添加html页面
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); //从js文件中分离样式文件的插件
+const FriendlyErrors = require('friendly-errors-webpack-plugin');
 const os = require('os');
 const ifaces = os.networkInterfaces();
-const publicPath = '/test/';
 
-function getLocalIp() {
+const publicPath = '/test/';
+const port = 8090;
+const getLocalIp = function() {
     let host = '127.0.0.1';
 
     for (const dev in ifaces) {
@@ -20,7 +22,7 @@ function getLocalIp() {
     }
 
     return host;
-}
+};
 
 module.exports = {
     entry: path.resolve(__dirname, 'src/index.js'),
@@ -85,12 +87,13 @@ module.exports = {
 
     //开启本地服务器
     devServer: {
+        noInfo: true, //不显示编译数据
         contentBase: path.join(__dirname, 'lib'), //可以在url上输入lib文件夹下面的文件的名称来访问该静态文件
         overlay: true, //如果报错，则把错误信息显示到浏览器上
         open: true, //服务器启动后打开默认浏览器
         openPage: publicPath.slice(1), //打开浏览器后显示的url参数
         host: getLocalIp(),
-        port: 8090,
+        port,
         publicPath, //项目的资源路径 通常与域名后的目录相同，必须是ccp的项目 则是 http://123123.com/ccp，那么publicPath应该是/ccp
         proxy: [
             // {
@@ -126,6 +129,14 @@ module.exports = {
             template: __dirname + '/template/index.html', //将指定的html页面内容覆盖到输出文件夹中的html里,并且会自动引入出口bundle.js以及分离出来的css文件
             favicon: __dirname + '/ico/favicon.ico', //添加网站的图标
             title: 'test' //添加网站的title
+        }),
+
+        new FriendlyErrors({
+            compilationSuccessInfo: {
+                messages: [
+                    `编译成功 运行于http://${getLocalIp()}:${port}${publicPath}`
+                ]
+            }
         })
     ]
 };
