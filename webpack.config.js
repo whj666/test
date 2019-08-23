@@ -91,7 +91,18 @@ module.exports = {
         openPage: publicPath.slice(1), //打开浏览器后显示的url参数
         host: getLocalIp(),
         port: 8090,
-        publicPath
+        publicPath, //项目的资源路径 通常与域名后的目录相同，必须是ccp的项目 则是 http://123123.com/ccp，那么publicPath应该是/ccp
+        proxy: [
+            {
+                context: [`!${publicPath}**`], //要代理的地址 此规则用！取反
+                target: 'https://platform-dev.mobilemd.cn', //要代理的目标
+                changeOrigin: true, //是否更改源
+                pathRewrite: {
+                    '^/$': '' //示例：/a/b代理到https://platform-dev.mobilemd.cn/b
+                },
+                cookieDomainRewrite: getLocalIp() //cookie域名重写
+            }
+        ]
     },
 
     plugins: [
