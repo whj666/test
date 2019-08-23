@@ -63,11 +63,13 @@ module.exports = {
         ]
     },
 
-    //开启一个服务器
+    //开启本地服务器
     devServer: {
+        contentBase: path.join(__dirname, 'lib'), //可以在url上输入lib文件夹下面的文件的名称来访问该静态文件
         overlay: true, //如果报错，则把错误信息显示到浏览器上
+        open: true, //服务器启动后打开默认浏览器 localhost:8080
         port: 8090, //监听8090端口
-        open: true //服务器启动后打开默认浏览器 localhost:8080
+        publicPath: '/test/'
     },
 
     plugins: [
