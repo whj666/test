@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin'); //在输入文件夹�
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); //从js文件中分离样式文件的插件
 const os = require('os');
 const ifaces = os.networkInterfaces();
+const publicPath = '/test/';
 
 function getLocalIp() {
     let host = '127.0.0.1';
@@ -87,9 +88,10 @@ module.exports = {
         contentBase: path.join(__dirname, 'lib'), //可以在url上输入lib文件夹下面的文件的名称来访问该静态文件
         overlay: true, //如果报错，则把错误信息显示到浏览器上
         open: true, //服务器启动后打开默认浏览器
+        openPage: publicPath.slice(1), //打开浏览器后显示的url参数
         host: getLocalIp(),
         port: 8090,
-        publicPath: '/test/'
+        publicPath
     },
 
     plugins: [
