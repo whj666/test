@@ -5,8 +5,8 @@ const FriendlyErrors = require('friendly-errors-webpack-plugin');
 const os = require('os');
 const ifaces = os.networkInterfaces();
 
-const publicPath = '/test/';
 const port = 8090;
+const publicPath = '/test/';
 const getLocalIp = function() {
     let host = '127.0.0.1';
 
@@ -85,6 +85,30 @@ module.exports = {
         ]
     },
 
+    plugins: [
+        //将从js中分离出来的样式合并到指定样式文件中
+        new MiniCssExtractPlugin({
+            filename: '[name].css',
+            chunkFilename: '[id].css'
+        }),
+
+        //在输出文件夹中添加html页面
+        new HtmlWebpackPlugin({
+            template: __dirname + '/template/index.html', //将指定的html页面内容覆盖到输出文件夹中的html里,并且会自动引入出口bundle.js以及分离出来的css文件
+            favicon: __dirname + '/ico/favicon.ico', //添加网站的图标
+            title: 'test' //添加网站的title
+        }),
+
+        //编译结束后，控制台显示的消息
+        new FriendlyErrors({
+            compilationSuccessInfo: {
+                messages: [
+                    `编译成功 运行于http://${getLocalIp()}:${port}${publicPath}`
+                ]
+            }
+        })
+    ],
+
     //开启本地服务器
     devServer: {
         noInfo: true, //不显示编译数据
@@ -115,28 +139,5 @@ module.exports = {
                 cookieDomainRewrite: getLocalIp() //cookie域名重写
             }
         ]
-    },
-
-    plugins: [
-        //将从js中分离出来的样式合并到指定样式文件中
-        new MiniCssExtractPlugin({
-            filename: '[name].css',
-            chunkFilename: '[id].css'
-        }),
-
-        //在输出文件夹中添加html页面
-        new HtmlWebpackPlugin({
-            template: __dirname + '/template/index.html', //将指定的html页面内容覆盖到输出文件夹中的html里,并且会自动引入出口bundle.js以及分离出来的css文件
-            favicon: __dirname + '/ico/favicon.ico', //添加网站的图标
-            title: 'test' //添加网站的title
-        }),
-
-        new FriendlyErrors({
-            compilationSuccessInfo: {
-                messages: [
-                    `编译成功 运行于http://${getLocalIp()}:${port}${publicPath}`
-                ]
-            }
-        })
-    ]
+    }
 };
