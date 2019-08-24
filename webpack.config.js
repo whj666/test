@@ -35,7 +35,8 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.jsx', '.less', '.css'],
         alias: {
-            component: path.resolve(__dirname, 'src/component') //使用绝对路径
+            component: path.resolve(__dirname, 'src/component'), //使用绝对路径
+            utils: path.resolve(__dirname, 'src/utils')
         }
     },
 
