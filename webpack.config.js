@@ -1,9 +1,9 @@
+const os = require('os');
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin'); //在输入文件夹里添加html页面
+const ifaces = os.networkInterfaces();
+const HtmlWebpackPlugin = require('html-webpack-plugin'); //在输出文件夹里添加html页面
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); //从js文件中分离样式文件的插件
 const FriendlyErrors = require('friendly-errors-webpack-plugin');
-const os = require('os');
-const ifaces = os.networkInterfaces();
 
 const port = 8090;
 const publicPath = '/test/';
@@ -111,6 +111,7 @@ module.exports = {
 
     //开启本地服务器
     devServer: {
+        contentBase: path.join(__dirname, 'static'), //可以访问static文件夹下的静态文件(文件夹下面得有一个和publicPath同名得文件夹，防止请求被代理)
         noInfo: true, //不显示编译数据
         overlay: true, //如果报错，则把错误信息显示到浏览器上
         open: true, //服务器启动后打开默认浏览器
