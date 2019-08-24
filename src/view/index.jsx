@@ -12,6 +12,11 @@ export default class App extends React.Component {
             }
         }).then(data => {
             console.log(data);
+
+            if (!data.data.success && data.data.errors[0].code === '405') {
+                alert(data.data.errors[0].code);
+                location.href = '/login';
+            }
         });
     }
 
