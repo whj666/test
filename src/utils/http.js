@@ -38,8 +38,8 @@ $http.interceptors.response.use(
             return Promise.reject('服务器错误');
         }
     },
-    function(error) {
-        return Promise.reject(error);
+    function() {
+        return Promise.reject('服务器错误');
     }
 );
 
