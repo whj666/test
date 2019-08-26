@@ -15,7 +15,7 @@ $http.interceptors.response.use(
         let data = response.data;
 
         if (data) {
-            if (data.success) {
+            if (data.success === true) {
                 return data.data;
             } else if (data.success === false) {
                 let code = data.errors[0].code;
@@ -30,6 +30,8 @@ $http.interceptors.response.use(
                 } else {
                     return Promise.reject(message);
                 }
+            } else {
+                return Promise.reject('服务器错误');
             }
         } else {
             return Promise.reject('服务器错误');
