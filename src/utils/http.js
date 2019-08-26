@@ -1,15 +1,17 @@
 import http from 'axios';
 
+//初始化配置
 const $http = http.create({
     baseURL: '/api/site-web',
     timeout: 50000000,
     headers: {
-        'TM-Header-Token': undefined,
-        'TM-Header-TenantId': undefined,
-        'TM-Header-UserId': undefined
+        'TM-Header-Token': 'cba0f8079b05495fa4c4de4cb0bef5e9',
+        'TM-Header-TenantId': '027028eb7553472c9d94a650001af23a',
+        'TM-Header-UserId': 'ff80808165a34efc0165d1b4d1a54bed'
     }
 });
 
+//拦截器
 $http.interceptors.response.use(
     function(response) {
         let data = response.data;
@@ -19,7 +21,6 @@ $http.interceptors.response.use(
                 return data.data;
             } else if (data.success === false) {
                 let code = data.errors[0].code;
-                let message = data.errors[0].message;
 
                 if (code === '405') {
                     alert('无权限访问');
@@ -28,7 +29,7 @@ $http.interceptors.response.use(
                     alert('帐号在异地登录，请重新登录');
                     location.href = '/login';
                 } else {
-                    return Promise.reject(message);
+                    return Promise.reject(data.errors);
                 }
             } else {
                 return Promise.reject('服务器错误');
