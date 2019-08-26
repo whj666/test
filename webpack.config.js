@@ -126,7 +126,7 @@ module.exports = {
             //     target: "http://192.168.100.97:6088",
             //     changeOrigin: true,
             //     pathRewrite: {
-            //         "^/$": "/"
+            //         "^/site-web-zw1": "/"
             //     },
             //     cookieDomainRewrite: getLocalIp()
             // },
@@ -134,9 +134,6 @@ module.exports = {
                 context: [`!${publicPath}**`], //要代理的地址 此规则用！取反
                 target: 'https://platform-dev.mobilemd.cn', //要代理的目标
                 changeOrigin: true, //是否更改源
-                pathRewrite: {
-                    '^/$': '/' //示例：/a/b代理到https://platform-dev.mobilemd.cn/b
-                },
                 cookieDomainRewrite: getLocalIp() //cookie域名重写
             }
         ]
