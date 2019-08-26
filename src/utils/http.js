@@ -45,19 +45,17 @@ $http.interceptors.response.use(
 
 export default $http;
 
-/*
- *  后端返回格式模板示例：
-    {
-        "success": false,
-        "errors": [{
-            "internationalized": true,
-            "code": "405",
-            "message": "token is null or not exists"
-        }]
-    }
+// 后端返回格式模板示例：
+// {
+//     "success": false,
+//     "errors": [{
+//         "internationalized": true,
+//         "code": "405",
+//         "message": "token is null or not exists"
+//     }]
+// }
 
-    {
-        "success": true,
-        "data": [{a: 1}]
-    }
-*/
+// {
+//     "success": true,
+//     "data": [{a: 1}]
+// }
