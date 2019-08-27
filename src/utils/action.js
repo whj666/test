@@ -31,7 +31,6 @@ export const queryMeetingList = params => {
 
 //     //请求
 //     init = async () => {
-//         //this.props.toggleLoading();
 //         try {
 //             const res = await queryMeetingList({
 //                 siteId: '027028eb7553472c9d94a650001af23a',
@@ -43,8 +42,6 @@ export const queryMeetingList = params => {
 //             console.log(res);
 //         } catch (error) {
 //             console.log(error);
-//         } finally {
-//             //this.props.toggleLoading();
 //         }
 //     };
 

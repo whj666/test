@@ -17,9 +17,9 @@ $http.interceptors.response.use(
         let data = response.data;
 
         if (data) {
-            if (data.success === true) {
+            if (data.success) {
                 return data.data;
-            } else if (data.success === false) {
+            } else if (data.success !== undefined && !data.success) {
                 let code = data.errors[0].code;
 
                 if (code === '405') {
