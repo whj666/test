@@ -5,7 +5,7 @@ const $http = http.create({
     baseURL: '/api/site-web',
     timeout: 50000000,
     headers: {
-        'TM-Header-Token': 'cba0f8079b05495fa4c4de4cb0bef5e9',
+        'TM-Header-Token': 'f78fb7eb2a3e482a89d700db4869511d',
         'TM-Header-TenantId': '027028eb7553472c9d94a650001af23a',
         'TM-Header-UserId': 'ff80808165a34efc0165d1b4d1a54bed'
     }

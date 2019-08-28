@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch, Route, withRouter } from 'react-router-dom';
+import Action from '../action';
 
 @withRouter
 class App extends React.Component {
@@ -23,7 +24,7 @@ class App extends React.Component {
                     )}
                 />
 
-                <Route path={`${path}a`} render={() => <div>a</div>} />
+                <Route path={`${path}a`} render={() => <Action />} />
             </Switch>
         );
     }
