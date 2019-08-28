@@ -120,6 +120,9 @@ module.exports = {
         host: getLocalIp(),
         port,
         publicPath, //项目的资源路径 通常与域名后的目录相同，必须是ccp的项目 则是 http://123123.com/ccp，那么publicPath应该是/ccp
+        historyApiFallback: {
+            index: publicPath //使用BrowserRouter的时候刷新页面不会报错
+        },
         proxy: [
             // {
             //     context: ["/site-web-zw1/**"],
