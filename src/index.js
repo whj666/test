@@ -1,6 +1,13 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+
 import App from './view';
 import 'utils/common.less';
 
-render(<App />, document.getElementById('root'));
+render(
+    <BrowserRouter basename="/test">
+        <App />
+    </BrowserRouter>,
+    document.getElementById('root')
+);

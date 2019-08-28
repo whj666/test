@@ -1,30 +1,30 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Switch, Route, withRouter } from 'react-router-dom';
 
+@withRouter
 class App extends React.Component {
     render() {
+        const {
+            match: { path }
+        } = this.props;
+
         return (
-            <BrowserRouter>
-                <Switch>
-                    <Route
-                        exact
-                        path="/test"
-                        render={props => (
-                            <div>
-                                首页
-                                <a
-                                    onClick={() =>
-                                        props.history.push('/test/a')
-                                    }
-                                >
-                                    a
-                                </a>
-                            </div>
-                        )}
-                    />
-                    <Route path="/test/a" render={() => <div>a</div>} />
-                </Switch>
-            </BrowserRouter>
+            <Switch>
+                <Route
+                    exact
+                    path={path}
+                    render={props => (
+                        <div>
+                            首页
+                            <a onClick={() => props.history.push(`${path}a`)}>
+                                a
+                            </a>
+                        </div>
+                    )}
+                />
+
+                <Route path={`${path}a`} render={() => <div>a</div>} />
+            </Switch>
         );
     }
 }
