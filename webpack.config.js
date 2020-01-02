@@ -6,7 +6,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin'); //从js文件�
 const FriendlyErrors = require('friendly-errors-webpack-plugin');
 
 const port = 8090;
-const publicPath = '/test/';
 const getLocalIp = function() {
     let host = '127.0.0.1';
 
@@ -103,9 +102,7 @@ module.exports = {
         //编译结束后，控制台显示的消息
         new FriendlyErrors({
             compilationSuccessInfo: {
-                messages: [
-                    `编译成功 运行于http://${getLocalIp()}:${port}${publicPath}`
-                ]
+                messages: [`编译成功 运行于http://${getLocalIp()}:${port}`]
             }
         })
     ],
@@ -116,26 +113,12 @@ module.exports = {
         noInfo: true, //不显示编译数据
         overlay: true, //如果报错，则把错误信息显示到浏览器上
         open: true, //服务器启动后打开默认浏览器
-        openPage: publicPath.slice(1), //打开浏览器后显示的url参数
         host: getLocalIp(),
         port,
-        publicPath, //项目的资源路径 通常与域名后的目录相同，必须是ccp的项目 则是 http://123123.com/ccp，那么publicPath应该是/ccp
-        historyApiFallback: {
-            index: publicPath //使用BrowserRouter的时候刷新页面不会报错
-        },
         proxy: [
-            // {
-            //     context: ["/site-web-zw1/**"],
-            //     target: "http://192.168.100.97:6088",
-            //     changeOrigin: true,
-            //     pathRewrite: {
-            //         "^/site-web-zw1": "/"
-            //     },
-            //     cookieDomainRewrite: getLocalIp()
-            // },
             {
-                context: [`!${publicPath}**`], //要代理的地址 此规则用！取反
-                target: 'https://platform-dev.mobilemd.cn', //要代理的目标
+                context: [`/adm/admin**`], //要代理的地址
+                target: 'http://192.168.1.53:8098/adm/admin/', //要代理的目标
                 changeOrigin: true, //是否更改源
                 cookieDomainRewrite: getLocalIp() //cookie域名重写
             }

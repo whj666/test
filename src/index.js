@@ -1,13 +1,13 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 
 import 'utils/common.less';
 import App from './view';
 
 render(
-    <BrowserRouter basename="/test">
+    <HashRouter>
         <App />
-    </BrowserRouter>,
+    </HashRouter>,
     document.getElementById('root')
 );

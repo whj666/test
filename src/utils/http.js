@@ -2,11 +2,8 @@ import http from 'axios';
 
 //初始化配置
 const $http = http.create({
-    baseURL: '/api/site-web',
-    timeout: 50000000,
-    headers: {
-        'TM-Header-Token': 'f78fb7eb2a3e482a89d700db4869511d'
-    }
+    baseURL: '/adm/admin',
+    timeout: 50000000
 });
 
 //拦截器
@@ -42,18 +39,3 @@ $http.interceptors.response.use(
 );
 
 export default $http;
-
-// 后端返回格式模板示例：
-// {
-//     "success": false,
-//     "errors": [{
-//         "internationalized": true,
-//         "code": "405",
-//         "message": "token is null or not exists"
-//     }]
-// }
-
-// {
-//     "success": true,
-//     "data": [{a: 1}]
-// }
